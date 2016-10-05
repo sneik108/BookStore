@@ -21,7 +21,7 @@ namespace Domain.Concrete
         public string ServerName = "smtp.gmail.com";
         public int ServerPort = 587;
         public bool WriteAsFile = true;
-        public string FileLocation = @"C:\Users\sneik\Downloads\BookStore — Part10\book_store_emails";
+        public string FileLocation = @"D:\";
     }
     
     public class EmailOrderProcessor : IOrderProcessor
@@ -57,10 +57,10 @@ namespace Domain.Concrete
                 foreach (var line in cart.Lines)
                 {
                     var subtotal = line.Book.Price * line.Quantity;
-                    body.AppendFormat("{0} x {1} (итого: {2:c}", line.Quantity, line.Book.Name, subtotal);
+                    body.AppendFormat("{0} x {1} (итого: {2} грн", line.Quantity, line.Book.Name, subtotal);
                 }
 
-                body.AppendFormat("Общая стоимость: {0:c}", cart.ComputeTotalValue())
+                body.AppendFormat("Общая стоимость: {0} грн", cart.ComputeTotalValue())
                     .AppendLine("---")
                     .AppendLine("Доставка:")
                     .AppendLine(shippingDetails.Name)
@@ -83,8 +83,16 @@ namespace Domain.Concrete
                 {
                     mailMessage.BodyEncoding = Encoding.UTF8;
                 }
+                try
+                {
+                    smtpClient.Send(mailMessage);
+                }
+                catch (Exception ex)
+                {
 
-                smtpClient.Send(mailMessage);
+                    Console.WriteLine(ex.Message);
+                }
+                
             }
         }
     }
