@@ -37,5 +37,20 @@ namespace Domain.Concrete
             }
             context.SaveChanges();
         }
+        public void DeleteBook(Book book)
+        {
+            Book dbEntry = context.Books.Where(b => b.BookId == book.BookId).FirstOrDefault();
+            if (dbEntry != null)
+            {
+                context.Books.Remove(dbEntry);
+                context.SaveChanges();
+            }
+        }
+
+        public void AddBook(Book book)
+        {
+            context.Books.Add(book);
+            context.SaveChanges();
+        }
     }
 }

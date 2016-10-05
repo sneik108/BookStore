@@ -11,5 +11,7 @@ namespace Domain.Abstract
     {
         IEnumerable<Book> Books { get; }
         void SaveBook(Book book);
+        void DeleteBook(Book book);
+        void AddBook(Book book);
     }
 }

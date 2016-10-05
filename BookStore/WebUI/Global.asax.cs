@@ -1,6 +1,8 @@
-﻿using Domain.Entities;
+﻿using Domain.Concrete;
+using Domain.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -13,6 +15,7 @@ namespace WebUI
     {
         protected void Application_Start()
         {
+            Database.SetInitializer(new DbInitializer());
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             ModelBinders.Binders.Add(typeof(Cart), new CartModelBinder());

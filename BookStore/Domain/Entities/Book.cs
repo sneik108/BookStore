@@ -31,7 +31,7 @@ namespace Domain.Entities
         [Required(ErrorMessage = "Пожалуйста, укажите жанр произведения")]
         public string Genre { get; set; }
 
-        [Display(Name = "Цена (руб)")]
+        [Display(Name = "Цена (грн)")]
         [Required]
         [Range(0.01,double.MaxValue,ErrorMessage = "Пожалуйста, введите положительное значение цены")]
         public decimal Price { get; set; }

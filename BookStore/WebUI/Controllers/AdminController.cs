@@ -43,5 +43,33 @@ namespace WebUI.Controllers
                 return View(book);
             }
         }
+        [HttpPost]
+        public ActionResult Delete(int bookId)
+        {
+            Book book = repository.Books.FirstOrDefault(b => b.BookId == bookId);
+            repository.DeleteBook(book);
+            TempData["message"] = string.Format("Удаление книги \"{0}\" выполнено", book.Name);
+            return RedirectToAction("Index");
+        }
+        public ViewResult Create()
+        {
+            Book book = new Book();
+            book.BookId = repository.Books.Max(b => b.BookId) + 1;
+            return View(book);
+        }
+        [HttpPost]
+        public ActionResult Create(Book book)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.AddBook(book);
+                TempData["message"] = string.Format("Добавлена книга \"{0}\" в базу", book.Name);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(book);
+            }
+        }
     }
 }
