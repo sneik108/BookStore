@@ -1,13 +1,17 @@
 ﻿using Domain.Abstract;
+using Domain.Entities;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebUI.Global.Auth;
 using WebUI.Models;
 
 namespace WebUI.Controllers
 {
+    [Authorize]
     public class BooksController : Controller
     {
         private IBookRepository repository;

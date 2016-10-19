@@ -3,12 +3,14 @@ using Domain.Concrete;
 using Domain.Entities;
 using Moq;
 using Ninject;
+using Ninject.Web.Common;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebUI.Global.Auth;
 
 namespace WebUI.Infrastructure
 {
@@ -33,6 +35,10 @@ namespace WebUI.Infrastructure
 
             kernel.Bind<IOrderProcessor>().To<EmailOrderProcessor>()
                 .WithConstructorArgument("settings", emailSettings);
+
+            kernel.Bind<IRepository>().To<SqlRepository>().InRequestScope();
+
+            kernel.Bind<IAuthentication>().To<CustomAuthentication>().InRequestScope();
         }
 
         public object GetService(Type serviceType)

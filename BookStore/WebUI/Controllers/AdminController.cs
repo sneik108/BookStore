@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace WebUI.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         IBookRepository repository;
@@ -16,7 +17,7 @@ namespace WebUI.Controllers
         {
             repository = repo;
         }
-
+        
         public ViewResult Index()
         {
             return View(repository.Books);
@@ -70,6 +71,11 @@ namespace WebUI.Controllers
             {
                 return View(book);
             }
+        }
+
+        public ActionResult ShowMap()
+        {
+            return View();
         }
     }
 }

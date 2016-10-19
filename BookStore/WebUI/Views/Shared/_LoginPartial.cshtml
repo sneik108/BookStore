@@ -1,0 +1,17 @@
+﻿@using Microsoft.AspNet.Identity
+
+
+@if (Request.IsAuthenticated)
+{
+    <div class="navbar-right hidden-xs">
+        @Html.ActionLink(User.Identity.Name + ", Logout", "Logout", "Login",
+        null, new { @class = "btn btn-primary navbar-btn" })
+    </div>
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right">
+        <li>@Html.ActionLink("Регистрация", "Register", "Login", routeValues: new { area = "" }, htmlAttributes: new { id = "registerLink" })</li>
+        <li>@Html.ActionLink("Вход", "Index", "Login", routeValues: new { area = "" }, htmlAttributes: new { id = "loginLink" })</li>
+    </ul>
+}

@@ -1,0 +1,60 @@
+﻿<script src="http://maps.google.com/maps/api/js?key=AIzaSyBAusooX1Arl6Sn7F-Yk1_-h0nUObqNUyQ" type="text/javascript"></script>
+
+<button id="btnPosition" class="btn btn-danger">Получить Ваше местоположение</button>
+<div id="map_canvas" style="height: 550px">
+</div>
+
+<section class="scripts">
+    <script type="text/javascript">
+        $(document).ready(function () {
+            Initialize(50.43815604, 30.51718712, 13);
+            $("#btnPosition").click(GetCoordinates);
+        });
+        function Initialize(_latitude, _longitude, _zoom) {
+            google.maps.visualRefresh = true;
+
+            var myPlace = new google.maps.LatLng(_latitude, _longitude);
+            var mapOptions = {
+                zoom: _zoom,
+                center: myPlace,
+                mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+            };
+            var map = new google.maps.Map(document.getElementById("map_canvas"), mapOptions);
+            var data = [
+                  { "Id": 1, "PlaceName": "Палац спорта", "GeoLong": "50.43695336", "GeoLat": "30.52261591", "Description": "Недалеко от данного места находится наш магазин, где в любое время с 09:00 до 18:00 Вы сможете совершить покупки" },
+                  { "Id": 2, "PlaceName": "Хрещатик ", "GeoLong": "50.44679256", "GeoLat": "30.52544832", "Description": "Недалеко от данного места находится наш магазин, где в любое время с 09:00 до 18:00 Вы сможете совершить покупки" },
+                  { "Id": 3, "PlaceName": "Золотые ворота", "GeoLong": "50.44583606", "GeoLat": "30.51544905", "Description": "Недалеко от данного места находится наш магазин, где в любое время с 09:00 до 18:00 Вы сможете совершить покупки" },
+                  { "Id": 4, "PlaceName": "Вокзальная станция", "GeoLong": "50.44127193", "GeoLat": "30.48985004", "Description": "Недалеко от данного места находится наш магазин, где в любое время с 09:00 до 18:00 Вы сможете совершить покупки" },
+                  { "Id": 5, "PlaceName": "Олимпийская станция", "GeoLong": "50.43104886", "GeoLat": "30.51615715", "Description": "Недалеко от данного места находится наш магазин, где в любое время с 09:00 до 18:00 Вы сможете совершить покупки" }
+            ];
+            $.each(data, function (i, item) {
+                var marker = new google.maps.Marker({
+                    'position': new google.maps.LatLng(item.GeoLong, item.GeoLat),
+                    'map': map,
+                    'title': item.PlaceName
+                });
+                marker.setIcon('http://maps.google.com/mapfiles/ms/icons/ltblue-dot.png');
+                var infoWindow = new google.maps.InfoWindow({
+                    content: "<div class='infoDiv'><h2>" + item.PlaceName +  "</h2>" + item.Description + "</div>"
+                });
+                google.maps.event.addListener(marker, 'click', function () {
+                    infoWindow.open(map, marker);
+                });
+            })
+        }
+        function GetCoordinates() {
+            var latitude = null;
+            var longitude = null;
+            navigator.geolocation.getCurrentPosition(
+                   function (position) {
+                       latitude = position.coords.latitude;
+                       longitude = position.coords.longitude;
+                       Initialize(latitude, longitude, 15);
+                   }
+           );
+        }
+
+
+
+    </script>
+</section>

@@ -1,5 +1,6 @@
 ﻿using Domain.Abstract;
 using Domain.Entities;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,17 +10,20 @@ using WebUI.Models;
 
 namespace WebUI.Controllers
 {
+    [Authorize]
     public class CartController : Controller
     {
         private IBookRepository repository;
         private IOrderProcessor orderProcessor;
+        [Inject]
+        public IRepository sqlRepository { get; set; } //для примера, что можно и так
 
         public CartController(IBookRepository repo, IOrderProcessor processor)
         {
             repository = repo;
             orderProcessor = processor;
         }
-
+        [Authorize]
         public ViewResult Index(Cart cart,string returnUrl)
         {
             return View(new CartIndexViewModel
@@ -84,6 +88,6 @@ namespace WebUI.Controllers
                 return View(new ShippingDetails());
             }
         }
-        
+
     }
 }
