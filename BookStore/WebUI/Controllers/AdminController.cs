@@ -73,9 +73,5 @@ namespace WebUI.Controllers
             }
         }
 
-        public ActionResult ShowMap()
-        {
-            return View();
-        }
     }
 }

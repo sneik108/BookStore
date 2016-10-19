@@ -3,7 +3,10 @@
     Layout = "~/Areas/HelpPages/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Вход";
 }
-
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-success">@TempData["message"]</div>
+}
 <h2>@ViewBag.Title.</h2>
 <div class="row">
     <div class="col-md-8">

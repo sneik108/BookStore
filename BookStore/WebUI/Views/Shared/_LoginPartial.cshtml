@@ -10,8 +10,8 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Регистрация", "Register", "Login", routeValues: new { area = "" }, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Вход", "Index", "Login", routeValues: new { area = "" }, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <div class="nav navbar-nav navbar-right">
+        @Html.ActionLink("Регистрация", "Register", "Login", null, new { @class = "btn btn-primary navbar-btn" })
+        @Html.ActionLink("Вход", "Index", "Login", null, new { @class = "btn btn-primary navbar-btn" })
+    </div>
 }
