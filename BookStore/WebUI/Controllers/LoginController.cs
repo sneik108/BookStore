@@ -86,7 +86,7 @@ namespace WebUI.Controllers
                 };
                 sqlRepository.CreateUser(user);
                 IEnumerable<User> users = sqlRepository.Users;
-                TempData["message"] = string.Format("Вы были успешно авторизированы, зайдите под своими данными");
+                TempData["messageAuth"] = string.Format("Вы были успешно авторизированы, зайдите под своими данными");
                 return RedirectToAction("List", "Books");
             }
             return View(userView);
