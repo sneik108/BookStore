@@ -99,11 +99,19 @@ namespace Domain.Concrete
             User user = new User
             {
                 Email = "test@gmail.com",
-                Password = "123",
+                Password = "12345",
+                Roles = roles,
+                AddedDate = DateTime.Now,
+            };
+            User user1 = new User
+            {
+                Email = "testtesttesttesttestaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa@gmail.com",
+                Password = "12345",
                 Roles = roles,
                 AddedDate = DateTime.Now,
             };
             context.Users.Add(user);
+            context.Users.Add(user1);
             context.SaveChanges();
             base.Seed(context);
         }
